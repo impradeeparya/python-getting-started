@@ -1,0 +1,24 @@
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        index_map = {}
+        for index in range(len(nums)):
+            index_map[nums[index]] = index
+
+        for index in range(len(nums)):
+            first_number = nums[index]
+            second_number = target - nums[index]
+
+            second_number_index = index_map.get(second_number)
+            if second_number_index is not None and index != second_number_index:
+                return [index, second_number_index]
+            else:
+                continue
+
+
+solution = Solution()
+print(solution.twoSum([3, 2, 4], 6))
