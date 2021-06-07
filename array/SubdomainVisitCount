@@ -1,0 +1,34 @@
+class Solution(object):
+    def update_subdomain_count(self, domain, count, domains_count):
+
+        while '.' in domain:
+            dot_index = domain.find('.')
+            domain = domain[dot_index + 1:]
+            domain_count = domains_count.get(domain, None)
+
+            if domain_count is None:
+                domain_count = count
+            else:
+                domain_count = domain_count + count
+
+            domains_count[domain] = domain_count
+
+    def subdomainVisits(self, cpdomains):
+        """
+        :type cpdomains: List[str]
+        :rtype: List[str]
+        """
+        domains_count = {}
+        for domain in cpdomains:
+            values = domain.split(" ")
+            domain_count = domains_count.get(values[1], 0)
+            domains_count[values[1]] = int(values[0]) + domain_count
+            self.update_subdomain_count(values[1], int(values[0]), domains_count)
+
+        output = []
+        for key, value in domains_count.items():
+            output.append(str(value) + " " + key)
+        return output
+
+
+print(Solution().subdomainVisits(["9001 discuss.leetcode.com"]))

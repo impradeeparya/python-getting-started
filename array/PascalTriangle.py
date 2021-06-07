@@ -14,11 +14,14 @@ class PascalTriangle(object):
 
         return n_factorial / (n_r_factorial * r_factorial)
 
-    def print_triangle(self, lines):
-        for row in range(lines):
+    def generate(self, numRows):
+        triangle = []
+        for row in range(numRows):
+            row_elements = []
             for column in range(row + 1):
-                print(int(self.binomial_coefficient(row, column)), end=' ')
-            print()
+                row_elements.append(int(self.binomial_coefficient(row, column)))
+            triangle.append(row_elements)
+        return triangle
 
 
-PascalTriangle().print_triangle(5)
+print(PascalTriangle().generate(5))

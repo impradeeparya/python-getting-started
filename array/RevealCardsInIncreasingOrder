@@ -1,0 +1,22 @@
+class Solution:
+    def deckRevealedIncreasing(self, deck):
+        """
+        :type deck: List[int]
+        :rtype: List[int]
+        """
+        queue = []
+        deck.sort()
+        result = [0] * len(deck)
+        for index in range(len(deck)):
+            queue.append(index)
+
+        for index in range(len(deck)):
+            queue_element = queue.pop(0)
+            result[queue_element] = deck[index]
+            if len(queue) > 0:
+                queue_element = queue.pop(0)
+                queue.append(queue_element)
+        return result
+
+
+print(Solution().deckRevealedIncreasing([17, 13, 11, 2, 3, 5, 7]))
